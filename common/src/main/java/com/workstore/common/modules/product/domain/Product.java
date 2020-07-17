@@ -25,6 +25,7 @@ import com.workstore.common.modules.account.domain.Account;
 import com.workstore.common.modules.common.domain.Address;
 import com.workstore.common.modules.common.domain.Association;
 import com.workstore.common.modules.image.domain.Image;
+import com.workstore.common.modules.tag.domain.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -64,6 +65,9 @@ public class Product {
 	@JoinColumn(name = "product_id")
 	private Set<Image> images = new HashSet<>();			// 상품 이미지
 	private int deleted = 0;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "product_id")
+	private Set<Tag> tags = new HashSet<>();
 
 	public void update(Product request) {
 		this.name = request.getName();
@@ -76,7 +80,13 @@ public class Product {
 		this.manageInfo = request.getManageInfo();
 		this.amenities = request.getAmenities();
 		this.cautionNotes = request.getCautionNotes();
+		changeTags(request.getTags());
 		//changeImages(request.getImages());
+	}
+
+	public void changeTags(Set<Tag> tags) {
+		this.tags.clear();
+		this.tags.addAll(tags);
 	}
 
 	public void changeImages(Set<Image> images) {

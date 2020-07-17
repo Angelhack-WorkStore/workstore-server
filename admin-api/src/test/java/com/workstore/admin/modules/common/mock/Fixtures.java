@@ -31,6 +31,7 @@ import com.workstore.common.modules.product.domain.Product;
 import com.workstore.common.modules.product.domain.SeatInfo;
 import com.workstore.common.modules.product.domain.SeatType;
 import com.workstore.common.modules.product.domain.SubscribePrice;
+import com.workstore.common.modules.tag.domain.Tag;
 
 public class Fixtures {
 
@@ -84,11 +85,11 @@ public class Fixtures {
 					.size(711204)
 					.build()
 			))*/
-			/*.tags(Set.of(
-				new TagPayload("코워킹 스페이스"),
-				new TagPayload("뷰 맛집"),
-				new TagPayload("강남구 논현동")
-			))*/;
+			.tags(List.of(
+				"코워킹 스페이스",
+				"뷰 맛집",
+				"강남구 논현동"
+			));
 	}
 
 	public static List<CautionNotePayload> cautionNotePayloads() {
@@ -102,6 +103,7 @@ public class Fixtures {
 
 	private static HostInfoPayload.HostInfoPayloadBuilder hostInfoPayload() {
 		return HostInfoPayload.builder()
+			.site("http://www.naver.com")
 			.hostEmail("rebwon@gmail.com")
 			.hostPhoneNumber("010-2314-1235");
 	}
@@ -135,7 +137,7 @@ public class Fixtures {
 			.cautionNotes(cautionNotes())
 			.amenities(amenities())
 			.manageInfo(manageInfos())
-			//.tags(tags())
+			.tags(tags())
 			.images(images());
 	}
 
@@ -170,13 +172,13 @@ public class Fixtures {
 			.hostPhoneNumber("010-2551-2351");
 	}
 
-	/*public static Set<Tag> tags() {
+	public static Set<Tag> tags() {
 		return Set.of(
 			new Tag("코워킹 스페이스"),
 			new Tag("자유석"),
 			new Tag("깔끔한 분위기")
 		);
-	}*/
+	}
 
 	public static Set<SubscribePrice> prices() {
 		return Set.of(

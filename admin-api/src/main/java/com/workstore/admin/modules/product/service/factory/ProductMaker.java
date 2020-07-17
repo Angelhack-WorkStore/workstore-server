@@ -32,6 +32,7 @@ import com.workstore.common.modules.product.domain.Product;
 import com.workstore.common.modules.product.domain.SeatInfo;
 import com.workstore.common.modules.product.domain.SeatType;
 import com.workstore.common.modules.product.domain.SubscribePrice;
+import com.workstore.common.modules.tag.domain.Tag;
 
 @Component
 public class ProductMaker {
@@ -48,7 +49,7 @@ public class ProductMaker {
 		Set<ManageInfo> manageInfos = convertManageInfo(payload);
 		List<Facility> amenities = convertAmenities(payload);
 		List<CautionNotes> cautionNotes = convertCautionNotes(payload);
-		//Set<Tag> tags = convertTags(payload);
+		Set<Tag> tags = convertTags(payload);
 		Address address = convertAddress(payload.getAddress());
 		SeatInfo seatInfo = convertSeatInfo(payload.getSeatInfo());
 		HostInfo hostInfo = convertHostInfo(payload.getHostInfo());
@@ -64,8 +65,8 @@ public class ProductMaker {
 			.manageInfo(manageInfos)
 			.cautionNotes(cautionNotes)
 			.prices(prices)
-			/*.tags(tags)
-			.images(images)*/
+			.tags(tags)
+			//.images(images)
 			.build();
 	}
 
@@ -102,13 +103,13 @@ public class ProductMaker {
 			.build();
 	}
 
-	/*private Set<Tag> convertTags(ProductPayload payload) {
+	private Set<Tag> convertTags(ProductPayload payload) {
 		Set<Tag> tags = new HashSet<>();
-		for(TagPayload each : payload.getTags()) {
-			tags.add(new Tag(each.getTagName()));
+		for(String each : payload.getTags()) {
+			tags.add(new Tag(each));
 		}
 		return tags;
-	}*/
+	}
 
 	private List<Facility> convertAmenities(ProductPayload payload) {
 		List<Facility> amenities = new ArrayList<>();

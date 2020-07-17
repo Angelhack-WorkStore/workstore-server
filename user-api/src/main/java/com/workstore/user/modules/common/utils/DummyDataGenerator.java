@@ -26,6 +26,7 @@ import com.workstore.common.modules.product.domain.ProductRepository;
 import com.workstore.common.modules.product.domain.SeatInfo;
 import com.workstore.common.modules.product.domain.SeatType;
 import com.workstore.common.modules.product.domain.SubscribePrice;
+import com.workstore.common.modules.tag.domain.Tag;
 
 @Component
 public class DummyDataGenerator implements CommandLineRunner {
@@ -54,7 +55,7 @@ public class DummyDataGenerator implements CommandLineRunner {
 			.cautionNotes(cautionNotes())
 			.amenities(amenities())
 			.manageInfo(manageInfos())
-			//.tags(tags())
+			.tags(tags())
 			//.images(images())
 			;
 	}
@@ -90,13 +91,13 @@ public class DummyDataGenerator implements CommandLineRunner {
 			.hostPhoneNumber("010-2551-2351");
 	}
 
-	/*public static Set<Tag> tags() {
+	public static Set<Tag> tags() {
 		return Set.of(
 			new Tag("코워킹 스페이스"),
 			new Tag("자유석"),
 			new Tag("깔끔한 분위기")
 		);
-	}*/
+	}
 
 	public static Set<SubscribePrice> prices() {
 		return Set.of(
