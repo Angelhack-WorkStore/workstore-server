@@ -79,6 +79,7 @@ public class ProductMaker {
 
 	private HostInfo convertHostInfo(HostInfoPayload hostInfo) {
 		return HostInfo.builder()
+			.site(hostInfo.getSite())
 			.hostEmail(hostInfo.getHostEmail())
 			.hostPhoneNumber(hostInfo.getHostPhoneNumber())
 			.build();

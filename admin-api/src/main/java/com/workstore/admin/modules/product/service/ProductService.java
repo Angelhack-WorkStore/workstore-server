@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workstore.admin.modules.product.api.request.ProductPayload;
+import com.workstore.admin.modules.product.exception.ProductNotFoundException;
 import com.workstore.admin.modules.product.service.factory.ProductMaker;
 import com.workstore.common.modules.product.domain.Product;
 import com.workstore.common.modules.product.domain.ProductRepository;
@@ -24,7 +25,7 @@ public class ProductService {
 	}
 
 	public Product update(Long productId, ProductPayload payload) {
-		Product dbProduct = productRepository.findById(productId).orElseThrow(IllegalArgumentException::new);
+		Product dbProduct = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
 		Product request = productMaker.make(payload);
 		dbProduct.update(request);
 		return dbProduct;
@@ -32,6 +33,6 @@ public class ProductService {
 
 	@Transactional(readOnly = true)
 	public Product findOne(Long productId) {
-		return productRepository.findById(productId).orElseThrow(IllegalArgumentException::new);
+		return productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
 	}
 }

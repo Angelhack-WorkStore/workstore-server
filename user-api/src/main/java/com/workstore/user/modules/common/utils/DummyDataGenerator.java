@@ -1,21 +1,15 @@
-package com.workstore.admin.modules.common.mock;
+package com.workstore.user.modules.common.utils;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.workstore.admin.modules.product.api.request.AddressPayload;
-import com.workstore.admin.modules.product.api.request.CautionNotePayload;
-import com.workstore.admin.modules.product.api.request.HostInfoPayload;
-import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
-import com.workstore.admin.modules.product.api.request.ProductImagePayload;
-import com.workstore.admin.modules.product.api.request.ProductPayload;
-import com.workstore.admin.modules.product.api.request.SeatInfoPayload;
-import com.workstore.admin.modules.product.api.request.SubscribePayload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
 import com.workstore.common.modules.common.domain.Address;
 import com.workstore.common.modules.common.domain.Association;
 import com.workstore.common.modules.common.domain.Money;
@@ -28,102 +22,27 @@ import com.workstore.common.modules.product.domain.ManageInfo;
 import com.workstore.common.modules.product.domain.ManageType;
 import com.workstore.common.modules.product.domain.PriceType;
 import com.workstore.common.modules.product.domain.Product;
+import com.workstore.common.modules.product.domain.ProductRepository;
 import com.workstore.common.modules.product.domain.SeatInfo;
 import com.workstore.common.modules.product.domain.SeatType;
 import com.workstore.common.modules.product.domain.SubscribePrice;
 
-public class Fixtures {
+@Component
+public class DummyDataGenerator implements CommandLineRunner {
 
-	public static ProductPayload.ProductPayloadBuilder registerProductPayload() {
-		Set<ManageInfoPayload> manageInfos = new HashSet<>();
-		for (int i = 1; i <= 7; i++) {
-			manageInfos.add(
-				ManageInfoPayload.builder()
-					.dayOfWeek(i)
-					.startTime(LocalTime.of(9, 0, 0))
-					.endTime(LocalTime.of(22, 0, 0))
-					.manageType("OPERATE")
-					.build()
-			);
+	@Autowired
+	private ProductRepository productRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		for(int i=1; i<5; i++) {
+			productRepository.save(product(i).build());
 		}
-		return ProductPayload.builder()
-			.name("마이워크스페이스 3호점 -지정석")
-			.description("마이 워크스페이스 좋다")
-			.content("많이 와")
-			.prices(Set.of(
-				SubscribePayload.builder()
-					.price(22000)
-					.type("DAY")
-					.minUsageDay(1)
-					.maxUsageDay(30)
-					.build(),
-				SubscribePayload.builder()
-					.price(660000)
-					.type("MONTH")
-					.minUsageDay(1)
-					.maxUsageDay(60)
-					.build()
-			))
-			.cautionNotes(cautionNotePayloads())
-			.address(addressPayload().build())
-			.seatInfo(seatInfoPayload().build())
-			.hostInfo(hostInfoPayload().build())
-			.amenities(List.of("AIRCON", "PRINTER"))
-			.manageInfos(manageInfos)
-			/*.images(Set.of(
-				ProductImagePayload.builder()
-					.fileName("london.jpg")
-					.imageType("MAIN")
-					.mimeType("image/jpg")
-					.size(611204)
-					.build(),
-				ProductImagePayload.builder()
-					.fileName("newyork.jpeg")
-					.imageType("THUMBNAIL")
-					.mimeType("image/jpeg")
-					.size(711204)
-					.build()
-			))*/
-			/*.tags(Set.of(
-				new TagPayload("코워킹 스페이스"),
-				new TagPayload("뷰 맛집"),
-				new TagPayload("강남구 논현동")
-			))*/;
 	}
 
-	public static List<CautionNotePayload> cautionNotePayloads() {
-		return List.of(
-			new CautionNotePayload("예약 시 유의사항 1"),
-			new CautionNotePayload("예약 시 유의사항 2"),
-			new CautionNotePayload("예약 시 유의사항 3"),
-			new CautionNotePayload("예약 시 유의사항 4")
-		);
-	}
-
-	private static HostInfoPayload.HostInfoPayloadBuilder hostInfoPayload() {
-		return HostInfoPayload.builder()
-			.hostEmail("rebwon@gmail.com")
-			.hostPhoneNumber("010-2314-1235");
-	}
-
-	private static SeatInfoPayload.SeatInfoPayloadBuilder seatInfoPayload() {
-		return SeatInfoPayload.builder()
-			.seatCount(15)
-			.maxPersonnelCount(15)
-			.minPersonnelCount(1)
-			.seatType("FREE");
-	}
-
-	private static AddressPayload.AddressPayloadBuilder addressPayload() {
-		return AddressPayload.builder()
-			.zipCode("123-41")
-			.address1("서울시 강남구 논현동")
-			.address2("빌지워터 빌딩 3층");
-	}
-
-	public static Product.ProductBuilder product() {
+	public static Product.ProductBuilder product(long index) {
 		return Product.builder()
-			.ownerId(new Association<>(1L))
+			.ownerId(new Association<>(index))
 			.name("슈가맨워크 상동2호점 자유석")
 			.description("온라인 기반으로 사업을 영위하는 창업자들의 공간")
 			.content("공간 소개란")
@@ -136,7 +55,8 @@ public class Fixtures {
 			.amenities(amenities())
 			.manageInfo(manageInfos())
 			//.tags(tags())
-			.images(images());
+			//.images(images())
+			;
 	}
 
 	public static List<CautionNotes> cautionNotes() {

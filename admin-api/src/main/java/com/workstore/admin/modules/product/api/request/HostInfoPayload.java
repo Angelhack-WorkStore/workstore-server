@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data @AllArgsConstructor @Builder
 public class HostInfoPayload {
+	private String site;
 	private String hostEmail;
 	private String hostPhoneNumber;
 }
