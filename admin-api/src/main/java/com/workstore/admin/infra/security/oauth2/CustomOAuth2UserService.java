@@ -69,13 +69,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		Account account = new Account();
 		int redirectUriLength = oAuth2UserRequest.getClientRegistration().getRedirectUriTemplate().length();
 		String role;
-		if(redirectUriLength == 55) {
+		if(redirectUriLength == 56) {
 			role = oAuth2UserRequest.getClientRegistration().getRedirectUriTemplate().substring(51);
 		}else {
 			role = oAuth2UserRequest.getClientRegistration().getRedirectUriTemplate().substring(52);
 		}
 		account.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
 		account.setProviderId(oAuth2UserInfo.getId());
+		account.setPassword("oauth2Default");
 		account.setNickname(oAuth2UserInfo.getName());
 		account.setEmail(oAuth2UserInfo.getEmail());
 		account.setImageUrl(oAuth2UserInfo.getImageUrl());

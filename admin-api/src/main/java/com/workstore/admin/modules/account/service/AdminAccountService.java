@@ -51,7 +51,7 @@ public class AdminAccountService {
 		mailService.send(emailMessage);
 	}
 
-	private Account saveNewAccount(SignUpRequest request) {
+	public Account saveNewAccount(SignUpRequest request) {
 		Account account = new Account();
 		account.setNickname(request.getName());
 		account.setEmail(request.getEmail());
