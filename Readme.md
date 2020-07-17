@@ -1,11 +1,18 @@
 ## WorkStore Server
 
-### Project Run
+### Application Run
 
+User
 - 루트 디렉터리인 workstore-server에서 mvn clean package를 시도한다.
 - 패키징이 완료되면, cd user-api를 시도한다.
 - user-api 디렉토리에서 다시 cd target을 한다.
 - java -jar user-api.jar를 실행한다.
+
+Admin
+- 루트 디렉터리인 workstore-server에서 mvn clean package를 시도한다.
+- 패키징이 완료되면, cd admin-api를 시도한다.
+- user-api 디렉토리에서 다시 cd target을 한다.
+- java -jar admin-api.jar를 실행한다.
 
 ### User Api
 
