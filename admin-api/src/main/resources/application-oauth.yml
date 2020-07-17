@@ -6,7 +6,7 @@ spring:
           google:
             clientId: 219846710491-giic5jrj4lq1qj6ci8li0veupnnru361.apps.googleusercontent.com
             clientSecret: 4w5AcSE6p3gyAZdl61ySIs-T
-            redirectUri: "http://localhost:8080/login/oauth2/code/google?role=user"
+            redirectUri: "http://localhost:8082/login/oauth2/code/google?role=admin"
             scope:
               - email
               - profile
@@ -15,7 +15,7 @@ spring:
             clientSecret: OYq6fP1VXf2IhqmeupEGnltWuPpWpYRu
             clientAuthenticationMethod: POST
             clientName: Kakao
-            redirectUri: "http://localhost:8080/login/oauth2/code/kakao?role=user"
+            redirectUri: "http://localhost:8082/login/oauth2/code/kakao?role=admin"
             authorizationGrantType: authorization_code
             scope:
               - account_email

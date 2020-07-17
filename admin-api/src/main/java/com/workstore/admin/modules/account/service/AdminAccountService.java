@@ -1,4 +1,4 @@
-package com.workstore.user.modules.account.service;
+package com.workstore.admin.modules.account.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -6,24 +6,24 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.workstore.admin.infra.config.AdminAppProperties;
+import com.workstore.admin.infra.mail.MailMessage;
+import com.workstore.admin.infra.mail.MailService;
+import com.workstore.admin.modules.account.api.request.SignUpRequest;
 import com.workstore.common.modules.account.domain.Account;
 import com.workstore.common.modules.account.domain.AccountRepository;
 import com.workstore.common.modules.account.domain.AuthProvider;
 import com.workstore.common.modules.account.domain.Role;
-import com.workstore.user.infra.config.UserAppProperties;
-import com.workstore.user.infra.mail.MailMessage;
-import com.workstore.user.infra.mail.MailService;
-import com.workstore.user.modules.account.api.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UserAccountService {
+public class AdminAccountService {
 	private final PasswordEncoder passwordEncoder;
 	private final AccountRepository accountRepository;
 	private final MailService mailService;
-	private final UserAppProperties appProperties;
+	private final AdminAppProperties appProperties;
 	private final TemplateEngine templateEngine;
 
 	public Account register(SignUpRequest request) {
@@ -59,7 +59,7 @@ public class UserAccountService {
 		account.setProvider(AuthProvider.local);
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		account.generateEmailCheckToken();
-		account.setRole(Role.USER);
+		account.setRole(Role.ADMIN);
 		return this.accountRepository.save(account);
 	}
 
