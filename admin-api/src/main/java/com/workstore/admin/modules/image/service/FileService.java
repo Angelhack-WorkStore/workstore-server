@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.workstore.admin.infra.config.AdminAppProperties;
 import com.workstore.admin.modules.product.api.request.ImagePayload;
-import com.workstore.common.modules.image.domain.ImageType;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -38,7 +37,7 @@ public class FileService {
 		}
 	}
 
-	public ImagePayload storeFile(MultipartFile file) {
+	public ImagePayload storeFile(MultipartFile file, String imageType) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
@@ -48,7 +47,7 @@ public class FileService {
 			Path targetLocation = this.fileLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-			ImagePayload image = new ImagePayload(fileName, file.getContentType(), file.getSize(), "MAIN");
+			ImagePayload image = new ImagePayload(fileName, file.getContentType(), file.getSize(), imageType);
 			return image;
 		} catch (IOException ex) {
 			throw new IllegalStateException("Could not store file " + fileName + ". Please try again!", ex);

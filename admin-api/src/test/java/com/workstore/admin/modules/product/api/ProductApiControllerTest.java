@@ -21,7 +21,7 @@ import com.workstore.common.modules.account.domain.AccountRepository;
 import com.workstore.common.modules.product.domain.Product;
 import com.workstore.common.modules.product.domain.ProductRepository;
 
-//@Disabled
+@Disabled
 class ProductApiControllerTest extends IntegrationTests {
 	private static final String PRODUCT_URI = "/api/admin/products";
 
