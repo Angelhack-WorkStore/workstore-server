@@ -8,11 +8,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.workstore.user.infra.security.TokenProvider;
+import com.workstore.user.infra.security.UserPrincipal;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -28,5 +33,20 @@ public class IntegrationTests {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
+	@Autowired
+	private TokenProvider tokenProvider;
+
 	protected static final String UTF8 = ";charset=UTF-8";
+
+	protected UserPrincipal getUserPrincipal() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		return (UserPrincipal) authentication.getPrincipal();
+	}
+
+	protected String getAuthenticationToken() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		return "Bearer " + tokenProvider.createToken(authentication);
+	}
 }

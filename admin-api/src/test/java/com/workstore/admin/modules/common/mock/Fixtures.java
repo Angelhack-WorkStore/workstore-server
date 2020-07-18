@@ -4,15 +4,18 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.mock.web.MockMultipartFile;
+
 import com.workstore.admin.modules.product.api.request.AddressPayload;
 import com.workstore.admin.modules.product.api.request.CautionNotePayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
-import com.workstore.admin.modules.product.api.request.ProductImagePayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
 import com.workstore.admin.modules.product.api.request.SeatInfoPayload;
 import com.workstore.admin.modules.product.api.request.SubscribePayload;
@@ -71,26 +74,23 @@ public class Fixtures {
 			.hostInfo(hostInfoPayload().build())
 			.amenities(List.of("AIRCON", "PRINTER"))
 			.manageInfos(manageInfos)
-			/*.images(Set.of(
-				ProductImagePayload.builder()
-					.fileName("london.jpg")
-					.imageType("MAIN")
-					.mimeType("image/jpg")
-					.size(611204)
-					.build(),
-				ProductImagePayload.builder()
-					.fileName("newyork.jpeg")
-					.imageType("THUMBNAIL")
-					.mimeType("image/jpeg")
-					.size(711204)
-					.build()
-			))*/
 			.tags(List.of(
 				"코워킹 스페이스",
 				"뷰 맛집",
 				"강남구 논현동"
 			));
 	}
+
+	/*public static List<ImagePayload> imagePayloads() {
+		List<ImagePayload> payloads = new ArrayList<>();
+		for(int i=1; i<6; i++) {
+			payloads.add(
+				new ImagePayload(
+					new MockMultipartFile("product-file", "fileName" + i + ".jpg", "image/jpg", new byte[213401]),
+				"THUMBNAIL"));
+		}
+		return payloads;
+	}*/
 
 	public static List<CautionNotePayload> cautionNotePayloads() {
 		return List.of(

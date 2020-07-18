@@ -20,11 +20,9 @@ import lombok.Setter;
 @Table(name = "IMAGES")
 @Entity
 @NoArgsConstructor @AllArgsConstructor
-@Getter @Setter @Builder
-@EqualsAndHashCode
+@Builder @Getter @Setter @EqualsAndHashCode
 public class Image {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String fileName;
 	private long size;
@@ -32,4 +30,12 @@ public class Image {
 	@Enumerated(EnumType.STRING)
 	private ImageType imageType;
 	private LocalDateTime createAt;
+
+	public Image(String fileName, long size, String mimeType, ImageType imageType) {
+		this.fileName = fileName;
+		this.size = size;
+		this.mimeType = mimeType;
+		this.imageType = imageType;
+		this.createAt = LocalDateTime.now();
+	}
 }

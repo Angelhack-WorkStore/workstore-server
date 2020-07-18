@@ -25,11 +25,6 @@ import com.workstore.admin.infra.security.oauth2.OAuth2AuthenticationSuccessHand
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-	securedEnabled = true,
-	jsr250Enabled = true,
-	prePostEnabled = true
-)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

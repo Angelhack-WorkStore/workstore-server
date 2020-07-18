@@ -1,7 +1,6 @@
 package com.workstore.admin.modules.product.service.factory;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,8 +11,8 @@ import org.springframework.stereotype.Component;
 import com.workstore.admin.modules.product.api.request.AddressPayload;
 import com.workstore.admin.modules.product.api.request.CautionNotePayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
-import com.workstore.admin.modules.product.api.request.ProductImagePayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
 import com.workstore.admin.modules.product.api.request.SeatInfoPayload;
 import com.workstore.admin.modules.product.api.request.SubscribePayload;
@@ -44,7 +43,7 @@ public class ProductMaker {
 	}
 
 	public Product make(ProductPayload payload) {
-		//Set<Image> images = convertImages(payload);
+		//Set<Image> images = manager.upload(payload.getImages());
 		Set<SubscribePrice> prices = convertSubscribePrices(payload);
 		Set<ManageInfo> manageInfos = convertManageInfo(payload);
 		List<Facility> amenities = convertAmenities(payload);
@@ -142,20 +141,4 @@ public class ProductMaker {
 		}
 		return prices;
 	}
-
-	/*private Set<Image> convertImages(ProductPayload payload) {
-		Set<Image> images = new HashSet<>();
-		for(ProductImagePayload each : payload.getImages()) {
-			images.add(
-				Image.builder()
-					.fileName(each.getFileName())
-					.size(each.getSize())
-					.mimeType(each.getMimeType())
-					.imageType(ImageType.valueOf(each.getImageType()))
-					.createAt(LocalDateTime.now())
-					.build()
-			);
-		}
-		return images;
-	}*/
 }

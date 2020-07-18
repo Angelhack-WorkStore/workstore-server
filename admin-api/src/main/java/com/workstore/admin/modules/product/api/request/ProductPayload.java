@@ -19,6 +19,6 @@ public class ProductPayload {
 	private Set<ManageInfoPayload> manageInfos;
 	private List<String> amenities;
 	private List<CautionNotePayload> cautionNotes;
-	//private Set<ProductImagePayload> images;
+	private List<ImagePayload> images;
 	private List<String> tags;
 }
