@@ -2,18 +2,15 @@ package com.workstore.admin.modules.product.service.factory;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 import com.workstore.admin.modules.product.api.request.AddressPayload;
 import com.workstore.admin.modules.product.api.request.CautionNotePayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
-import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
 import com.workstore.admin.modules.product.api.request.SeatInfoPayload;
@@ -21,8 +18,6 @@ import com.workstore.admin.modules.product.api.request.SubscribePayload;
 import com.workstore.common.modules.common.domain.Address;
 import com.workstore.common.modules.common.domain.Association;
 import com.workstore.common.modules.common.domain.Money;
-import com.workstore.common.modules.image.domain.Image;
-import com.workstore.common.modules.image.domain.ImageType;
 import com.workstore.common.modules.product.domain.CautionNotes;
 import com.workstore.common.modules.product.domain.Facility;
 import com.workstore.common.modules.product.domain.HostInfo;
@@ -115,12 +110,7 @@ public class ProductMaker {
 	private List<Facility> convertAmenities(ProductPayload payload) {
 		List<Facility> amenities = new ArrayList<>();
 		for(String each : payload.getAmenities()) {
-
-			Arrays.stream(Facility.values())
-				.filter(f -> f.isCorrect(each))
-				.map(Facility::getName)
-				.collect(Collectors.toList());
-			amenities.add(Facility.valueOf(Facility.class, each));
+			amenities.add(Facility.valueOf(each));
 		}
 		return amenities;
 	}

@@ -33,8 +33,4 @@ public enum Facility {
 	Facility(String name) {
 		this.name = name;
 	}
-
-	public boolean isCorrect(String name) {
-		return name.equalsIgnoreCase(this.name);
-	}
 }
