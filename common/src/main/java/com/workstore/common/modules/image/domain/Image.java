@@ -25,13 +25,13 @@ public class Image {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String fileName;
-	private long size;
 	private String mimeType;
+	private long size;
 	@Enumerated(EnumType.STRING)
 	private ImageType imageType;
 	private LocalDateTime createdAt;
 
-	public Image(String fileName, long size, String mimeType, ImageType imageType) {
+	public Image(String fileName, String mimeType, long size, ImageType imageType) {
 		this.fileName = fileName;
 		this.size = size;
 		this.mimeType = mimeType;

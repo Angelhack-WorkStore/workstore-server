@@ -17,7 +17,7 @@ public class AdminAppProperties {
 	private final OAuth2 oauth2 = new OAuth2();
 	private final Mail mail = new Mail();
 	private final KakaoPay kakaoPay = new KakaoPay();
-	private final FileStorage storage = new FileStorage();
+	private final FileStorage file = new FileStorage();
 
 	@Data
 	public static class FileStorage {

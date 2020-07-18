@@ -39,7 +39,7 @@ public class ProductMaker {
 	}
 
 	public Product make(ProductPayload payload) {
-		//Set<Image> images = manager.upload(payload.getImages());
+		//Set<Image> images = convertImages(payload.getImages());
 		Set<SubscribePrice> prices = convertSubscribePrices(payload);
 		Set<ManageInfo> manageInfos = convertManageInfo(payload);
 		List<Facility> amenities = convertAmenities(payload);
@@ -129,12 +129,13 @@ public class ProductMaker {
 
 	private Set<SubscribePrice> convertSubscribePrices(ProductPayload payload) {
 		Set<SubscribePrice> prices = new HashSet<>();
-		for(SubscribePayload each : payload.getPrices()) {
-			prices.add(SubscribePrice.builder()
-				.price(Money.wons(each.getPrice().getAmount()))
-				.priceType(PriceType.valueOf(each.getType()))
+		SubscribePayload subscribePayload = payload.getPrices();
+		prices.add(SubscribePrice.builder()
+				.price(Money.wons(subscribePayload.getPrice().getAmount()))
+				.priceType(PriceType.valueOf(subscribePayload.getPriceType()))
+				.maxUsageDay(subscribePayload.getMaxUsageDay())
+				.minUsageDay(subscribePayload.getMinUsageDay())
 				.build());
-		}
 		return prices;
 	}
 }

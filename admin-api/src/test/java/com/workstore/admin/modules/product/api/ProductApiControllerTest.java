@@ -22,7 +22,7 @@ import com.workstore.common.modules.product.domain.Product;
 import com.workstore.common.modules.product.domain.ProductRepository;
 
 @Disabled
-class ProductControllerTest extends IntegrationTests {
+class ProductApiControllerTest extends IntegrationTests {
 	private static final String PRODUCT_URI = "/api/admin/products";
 
 	@Autowired

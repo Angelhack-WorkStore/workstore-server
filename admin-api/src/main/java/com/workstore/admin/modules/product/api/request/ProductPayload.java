@@ -15,7 +15,7 @@ public class ProductPayload {
 	private AddressPayload address;
 	private SeatInfoPayload seatInfo;
 	private HostInfoPayload hostInfo;
-	private Set<SubscribePayload> prices;
+	private SubscribePayload prices;
 	private Set<ManageInfoPayload> manageInfos;
 	private List<String> amenities;
 	private List<String> cautionNotes;
