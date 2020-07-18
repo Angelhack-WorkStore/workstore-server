@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.workstore.admin.modules.product.api.request.AddressPayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
 import com.workstore.admin.modules.product.api.request.SeatInfoPayload;
@@ -17,6 +18,8 @@ import com.workstore.admin.modules.product.api.request.SubscribePayload;
 import com.workstore.common.modules.common.domain.Address;
 import com.workstore.common.modules.common.domain.Association;
 import com.workstore.common.modules.common.domain.Money;
+import com.workstore.common.modules.image.domain.Image;
+import com.workstore.common.modules.image.domain.ImageType;
 import com.workstore.common.modules.product.domain.CautionNotes;
 import com.workstore.common.modules.product.domain.Facility;
 import com.workstore.common.modules.product.domain.HostInfo;
@@ -39,7 +42,7 @@ public class ProductMaker {
 	}
 
 	public Product make(ProductPayload payload) {
-		//Set<Image> images = convertImages(payload.getImages());
+		Set<Image> images = convertImages(payload.getImages());
 		Set<SubscribePrice> prices = convertSubscribePrices(payload);
 		Set<ManageInfo> manageInfos = convertManageInfo(payload);
 		List<Facility> amenities = convertAmenities(payload);
@@ -61,8 +64,18 @@ public class ProductMaker {
 			.cautionNotes(cautionNotes)
 			.prices(prices)
 			.tags(tags)
-			//.images(images)
+			.images(images)
 			.build();
+	}
+
+	private Set<Image> convertImages(List<ImagePayload> imagePayloads) {
+		Set<Image> images = new HashSet<>();
+		for(ImagePayload each : imagePayloads) {
+			images.add(new Image(each.getFileName(),
+				each.getMimeType(),
+				each.getFilePath(), each.getSize(), ImageType.valueOf(each.getImageType())));
+		}
+		return images;
 	}
 
 	private List<CautionNotes> convertCautionNotes(ProductPayload payload) {

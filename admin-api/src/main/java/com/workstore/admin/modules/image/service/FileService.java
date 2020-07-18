@@ -16,8 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.workstore.admin.infra.config.AdminAppProperties;
-import com.workstore.common.modules.image.domain.Image;
-import com.workstore.common.modules.image.domain.ImageRepository;
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.common.modules.image.domain.ImageType;
 import lombok.RequiredArgsConstructor;
 
@@ -26,13 +25,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FileService {
 	private final Path fileLocation;
-	private final ImageRepository imageRepository;
 
 	@Autowired
-	public FileService(AdminAppProperties prop, ImageRepository imageRepository) {
+	public FileService(AdminAppProperties prop) {
 		this.fileLocation = Paths.get(prop.getFile().getUploadDir())
 			.toAbsolutePath().normalize();
-		this.imageRepository = imageRepository;
 
 		try {
 			Files.createDirectories(this.fileLocation);
@@ -41,7 +38,7 @@ public class FileService {
 		}
 	}
 
-	public Image storeFile(MultipartFile file) {
+	public ImagePayload storeFile(MultipartFile file) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
@@ -51,8 +48,8 @@ public class FileService {
 			Path targetLocation = this.fileLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-			Image image = new Image(fileName, file.getContentType(), file.getSize(), ImageType.THUMBNAIL);
-			return imageRepository.save(image);
+			ImagePayload image = new ImagePayload(fileName, file.getContentType(), file.getSize(), "MAIN");
+			return image;
 		} catch (IOException ex) {
 			throw new IllegalStateException("Could not store file " + fileName + ". Please try again!", ex);
 		}

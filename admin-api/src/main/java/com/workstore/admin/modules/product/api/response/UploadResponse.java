@@ -1,15 +1,13 @@
 package com.workstore.admin.modules.product.api.response;
 
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 public class UploadResponse {
-	private String fileName;
-	private String fileStaticUri;
-	private String fileType;
-	private String imageType;
-	private long size;
+	private ImagePayload image;
 }
 

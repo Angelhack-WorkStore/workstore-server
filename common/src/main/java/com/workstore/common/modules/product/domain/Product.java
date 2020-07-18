@@ -96,7 +96,7 @@ public class Product {
 		this.amenities = request.getAmenities();
 		this.cautionNotes = request.getCautionNotes();
 		changeTags(request.getTags());
-		//changeImages(request.getImages());
+		changeImages(request.getImages());
 	}
 
 	public void changeTags(Set<Tag> tags) {

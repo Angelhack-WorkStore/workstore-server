@@ -22,9 +22,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.workstore.admin.infra.security.CurrentUser;
 import com.workstore.admin.modules.image.service.FileService;
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.response.UploadResponse;
 import com.workstore.common.modules.account.domain.Account;
-import com.workstore.common.modules.image.domain.Image;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,20 +35,20 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductImageController {
 	private final FileService fileService;
 
-	@PostMapping(value = "/image")
+	@PostMapping("/image")
 	public UploadResponse upload(@RequestParam("image") MultipartFile image, @CurrentUser Account account) {
-		Image dbImage = fileService.storeFile(image);
+		ImagePayload localImage = fileService.storeFile(image);
 
-		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		String fileCallBackUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 			.path("/api/admin/products/images/")
-			.path(dbImage.getFileName())
+			.path(localImage.getFileName())
 			.toUriString();
 
-		return new UploadResponse(dbImage.getFileName(), fileDownloadUri,
-			image.getContentType(), dbImage.getImageType().name(), image.getSize());
+		localImage.setFilePath(fileCallBackUri);
+		return new UploadResponse(localImage);
 	}
 
-	@PostMapping(value = "/images")
+	@PostMapping("/images")
 	public List<UploadResponse> multipleUpload(@RequestParam("image") MultipartFile[] images, @CurrentUser Account account) {
 		return Arrays.stream(images)
 			.map(image -> upload(image, account))

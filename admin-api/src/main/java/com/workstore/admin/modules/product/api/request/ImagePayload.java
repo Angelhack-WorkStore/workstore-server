@@ -1,17 +1,22 @@
 package com.workstore.admin.modules.product.api.request;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class ImagePayload {
-	@JsonIgnore
-	private MultipartFile file;
-	@JsonProperty("file")
 	private String fileName;
+	private String mimeType;
+	private String filePath;
+	private long size;
 	private String imageType;
+
+	public ImagePayload(String fileName, String mimeType, long size,
+		String imageType) {
+		this.fileName = fileName;
+		this.mimeType = mimeType;
+		this.size = size;
+		this.imageType = imageType;
+	}
 }

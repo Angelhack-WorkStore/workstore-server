@@ -3,12 +3,14 @@ package com.workstore.admin.modules.common.mock;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.workstore.admin.modules.product.api.request.AddressPayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
+import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
 import com.workstore.admin.modules.product.api.request.MoneyPayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
@@ -61,6 +63,7 @@ public class Fixtures {
 			.hostInfo(hostInfoPayload().build())
 			.amenities(List.of("WIFI", "PRINTER"))
 			.manageInfos(manageInfos)
+			.images(imagePayloads())
 			.tags(List.of(
 				"코워킹 스페이스",
 				"뷰 맛집",
@@ -68,16 +71,14 @@ public class Fixtures {
 			));
 	}
 
-	/*public static List<ImagePayload> imagePayloads() {
-		List<ImagePayload> payloads = new ArrayList<>();
-		for(int i=1; i<6; i++) {
-			payloads.add(
-				new ImagePayload(
-					new MockMultipartFile("product-file", "fileName" + i + ".jpg", "image/jpg", new byte[213401]),
-				"THUMBNAIL"));
-		}
-		return payloads;
-	}*/
+	public static List<ImagePayload> imagePayloads() {
+		return List.of(
+			new ImagePayload("london.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london.jpg", 15188, "MAIN"),
+			new ImagePayload("london1.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london1.jpg", 15188, "THUMBNAIL"),
+			new ImagePayload("london2.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london2.jpg", 15188, "THUMBNAIL"),
+			new ImagePayload("london3.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london3.jpg", 15188, "THUMBNAIL")
+			);
+	}
 
 	public static List<String> cautionNotePayloads() {
 		return List.of(

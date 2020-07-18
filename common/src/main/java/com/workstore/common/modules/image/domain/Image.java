@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -26,16 +27,22 @@ public class Image {
 	private Long id;
 	private String fileName;
 	private String mimeType;
+	private String filePath;
 	private long size;
 	@Enumerated(EnumType.STRING)
 	private ImageType imageType;
 	private LocalDateTime createdAt;
 
-	public Image(String fileName, String mimeType, long size, ImageType imageType) {
+	@PrePersist
+	public void setCreatedAt() {
+		this.createdAt = LocalDateTime.now();
+	}
+
+	public Image(String fileName, String mimeType, String filePath, long size, ImageType imageType) {
 		this.fileName = fileName;
+		this.filePath = filePath;
 		this.size = size;
 		this.mimeType = mimeType;
 		this.imageType = imageType;
-		this.createdAt = LocalDateTime.now();
 	}
 }
