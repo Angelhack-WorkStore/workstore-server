@@ -1,6 +1,8 @@
 package com.workstore.common.modules.product.domain;
 
 public enum Facility {
+	WIFI("인터넷/와이파이"),
+	TV("TV/프로젝터"),
 	AIRCON("에어컨"),
 	CAFETERIA("카페 및 레스토랑"),
 	PRINTER("인쇄/복사기"),
