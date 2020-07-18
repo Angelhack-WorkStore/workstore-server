@@ -1,5 +1,6 @@
 package com.workstore.common.modules.product.domain;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -68,6 +71,18 @@ public class Product {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "product_id")
 	private Set<Tag> tags = new HashSet<>();
+	private LocalDateTime createAt;
+	private LocalDateTime modifiedAt;
+
+	@PrePersist
+	public void setCreateAt() {
+		this.createAt = LocalDateTime.now();
+	}
+
+	@PreUpdate
+	public void setModifiedAt() {
+		this.modifiedAt = LocalDateTime.now();
+	}
 
 	public void update(Product request) {
 		this.name = request.getName();

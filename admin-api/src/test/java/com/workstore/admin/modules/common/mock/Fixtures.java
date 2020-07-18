@@ -207,28 +207,28 @@ public class Fixtures {
 				.size(601231)
 				.mimeType("image/jpg")
 				.imageType(ImageType.MAIN)
-				.createAt(LocalDateTime.now())
+				.createdAt(LocalDateTime.now())
 				.build(),
 			Image.builder()
 				.fileName("thumb1.jpg")
 				.size(701231)
 				.mimeType("image/jpg")
 				.imageType(ImageType.THUMBNAIL)
-				.createAt(LocalDateTime.now())
+				.createdAt(LocalDateTime.now())
 				.build(),
 			Image.builder()
 				.fileName("thumb2.jpg")
 				.size(501231)
 				.mimeType("image/jpg")
 				.imageType(ImageType.THUMBNAIL)
-				.createAt(LocalDateTime.now())
+				.createdAt(LocalDateTime.now())
 				.build(),
 			Image.builder()
 				.fileName("thumb3.jpg")
 				.size(801231)
 				.mimeType("image/jpg")
 				.imageType(ImageType.THUMBNAIL)
-				.createAt(LocalDateTime.now())
+				.createdAt(LocalDateTime.now())
 				.build()
 		);
 	}

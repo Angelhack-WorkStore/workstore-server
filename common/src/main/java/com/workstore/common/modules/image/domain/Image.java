@@ -29,13 +29,13 @@ public class Image {
 	private String mimeType;
 	@Enumerated(EnumType.STRING)
 	private ImageType imageType;
-	private LocalDateTime createAt;
+	private LocalDateTime createdAt;
 
 	public Image(String fileName, long size, String mimeType, ImageType imageType) {
 		this.fileName = fileName;
 		this.size = size;
 		this.mimeType = mimeType;
 		this.imageType = imageType;
-		this.createAt = LocalDateTime.now();
+		this.createdAt = LocalDateTime.now();
 	}
 }
