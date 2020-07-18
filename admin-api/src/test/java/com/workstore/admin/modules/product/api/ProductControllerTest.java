@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.workstore.common.modules.account.domain.AccountRepository;
 import com.workstore.common.modules.product.domain.Product;
 import com.workstore.common.modules.product.domain.ProductRepository;
 
+@Disabled
 class ProductControllerTest extends IntegrationTests {
 	private static final String PRODUCT_URI = "/api/admin/products";
 

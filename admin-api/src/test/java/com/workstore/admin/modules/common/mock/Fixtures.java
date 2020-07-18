@@ -72,7 +72,7 @@ public class Fixtures {
 			.address(addressPayload().build())
 			.seatInfo(seatInfoPayload().build())
 			.hostInfo(hostInfoPayload().build())
-			.amenities(List.of("AIRCON", "PRINTER"))
+			.amenities(List.of("인터넷/와이파이", "인쇄/복사기"))
 			.manageInfos(manageInfos)
 			.tags(List.of(
 				"코워킹 스페이스",
