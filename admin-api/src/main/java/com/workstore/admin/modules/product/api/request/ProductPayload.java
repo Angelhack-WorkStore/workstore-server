@@ -18,7 +18,7 @@ public class ProductPayload {
 	private Set<SubscribePayload> prices;
 	private Set<ManageInfoPayload> manageInfos;
 	private List<String> amenities;
-	private List<CautionNotePayload> cautionNotes;
+	private List<String> cautionNotes;
 	private List<ImagePayload> images;
 	private List<String> tags;
 }

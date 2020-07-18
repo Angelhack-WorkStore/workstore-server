@@ -9,7 +9,6 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.workstore.admin.modules.product.api.request.AddressPayload;
-import com.workstore.admin.modules.product.api.request.CautionNotePayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
@@ -68,8 +67,8 @@ public class ProductMaker {
 
 	private List<CautionNotes> convertCautionNotes(ProductPayload payload) {
 		List<CautionNotes> cautionNotes = new ArrayList<>();
-		for (CautionNotePayload each : payload.getCautionNotes()) {
-			cautionNotes.add(new CautionNotes(each.getCaution()));
+		for (String each : payload.getCautionNotes()) {
+			cautionNotes.add(new CautionNotes(each));
 		}
 		return cautionNotes;
 	}
@@ -132,7 +131,7 @@ public class ProductMaker {
 		Set<SubscribePrice> prices = new HashSet<>();
 		for(SubscribePayload each : payload.getPrices()) {
 			prices.add(SubscribePrice.builder()
-				.price(Money.wons(each.getPrice()))
+				.price(Money.wons(each.getPrice().getAmount()))
 				.priceType(PriceType.valueOf(each.getType()))
 				.build());
 		}

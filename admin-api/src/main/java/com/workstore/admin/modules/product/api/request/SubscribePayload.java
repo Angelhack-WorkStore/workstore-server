@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data @AllArgsConstructor @Builder
 public class SubscribePayload {
-	private Integer price;
+	private MoneyPayload price;
 	private String type;
 	private Integer minUsageDay;
 	private Integer maxUsageDay;

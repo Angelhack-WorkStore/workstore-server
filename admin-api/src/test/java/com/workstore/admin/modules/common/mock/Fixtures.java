@@ -1,21 +1,16 @@
 package com.workstore.admin.modules.common.mock;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.mock.web.MockMultipartFile;
-
 import com.workstore.admin.modules.product.api.request.AddressPayload;
-import com.workstore.admin.modules.product.api.request.CautionNotePayload;
 import com.workstore.admin.modules.product.api.request.HostInfoPayload;
-import com.workstore.admin.modules.product.api.request.ImagePayload;
 import com.workstore.admin.modules.product.api.request.ManageInfoPayload;
+import com.workstore.admin.modules.product.api.request.MoneyPayload;
 import com.workstore.admin.modules.product.api.request.ProductPayload;
 import com.workstore.admin.modules.product.api.request.SeatInfoPayload;
 import com.workstore.admin.modules.product.api.request.SubscribePayload;
@@ -56,13 +51,13 @@ public class Fixtures {
 			.content("많이 와")
 			.prices(Set.of(
 				SubscribePayload.builder()
-					.price(22000)
+					.price(new MoneyPayload(22000))
 					.type("DAY")
 					.minUsageDay(1)
 					.maxUsageDay(30)
 					.build(),
 				SubscribePayload.builder()
-					.price(660000)
+					.price(new MoneyPayload(660000))
 					.type("MONTH")
 					.minUsageDay(1)
 					.maxUsageDay(60)
@@ -92,12 +87,12 @@ public class Fixtures {
 		return payloads;
 	}*/
 
-	public static List<CautionNotePayload> cautionNotePayloads() {
+	public static List<String> cautionNotePayloads() {
 		return List.of(
-			new CautionNotePayload("예약 시 유의사항 1"),
-			new CautionNotePayload("예약 시 유의사항 2"),
-			new CautionNotePayload("예약 시 유의사항 3"),
-			new CautionNotePayload("예약 시 유의사항 4")
+			"예약 시 유의사항 1",
+			"예약 시 유의사항 2",
+			"예약 시 유의사항 3",
+			"예약 시 유의사항 4"
 		);
 	}
 

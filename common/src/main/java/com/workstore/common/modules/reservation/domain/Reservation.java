@@ -75,6 +75,14 @@ public class Reservation extends AbstractAggregateRoot<Reservation> {
 		this.deleted = 1;
 	}
 
+	public Long getProductId() {
+		return this.lineItems.get(0).getProductId();
+	}
+
+	public Integer getQuantity() {
+		return this.lineItems.get(0).getQuantity();
+	}
+
 	private void verifyStatus() {
 		if(this.status != ReservationStatus.RESERVED) {
 			throw new IllegalStateException("예매 취소 가능한 상태가 아닙니다.");
