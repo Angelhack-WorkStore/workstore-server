@@ -80,7 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/", "/error", "/favicon.ico", "/**/*.png",
 				"/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
-			.antMatchers("/api/auth/**", "/oauth2/**", "/api/auth/check-email-token/**").permitAll()
+			.antMatchers("/api/auth/**", "/oauth2/**", "/api/auth/check-email-token/**",
+				"/api/admin/products/images", "/api/admin/products/image", "/api/admin/products/images/**").permitAll()
 			.anyRequest().authenticated()
 				.and()
 			.oauth2Login()

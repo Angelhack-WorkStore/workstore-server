@@ -36,8 +36,8 @@ public class ProductImageController {
 	private final FileService fileService;
 
 	@PostMapping("/image")
-	public UploadResponse upload(@RequestParam("image") MultipartFile image, @RequestParam("imageType") String imageType,
-		@CurrentUser Account account) {
+	public UploadResponse upload(@RequestParam("image") MultipartFile image, @RequestParam("imageType") String imageType
+		/*@CurrentUser Account account*/) {
 		ImagePayload localImage = fileService.storeFile(image, imageType);
 
 		String fileCallBackUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -50,16 +50,16 @@ public class ProductImageController {
 	}
 
 	@PostMapping("/images")
-	public List<UploadResponse> multipleUpload(@RequestParam("image") MultipartFile[] images, @RequestParam("imageType") String imageType,
-		@CurrentUser Account account) {
+	public List<UploadResponse> multipleUpload(@RequestParam("image") MultipartFile[] images, @RequestParam("imageType") String imageType
+		/*@CurrentUser Account account*/) {
 		return Arrays.stream(images)
-			.map(image -> upload(image, imageType, account))
+			.map(image -> upload(image, imageType/*account*/))
 			.collect(Collectors.toList());
 	}
 
 	@GetMapping("/images/{imageName}")
-	public ResponseEntity<Resource> getImage(@PathVariable String imageName, HttpServletRequest request,
-		@CurrentUser Account account) {
+	public ResponseEntity<Resource> getImage(@PathVariable String imageName, HttpServletRequest request
+		/*@CurrentUser Account account*/) {
 		Resource resource = fileService.loadFileAsResource(imageName);
 
 		String contentType = null;
