@@ -73,11 +73,11 @@ public class Fixtures {
 
 	public static List<ImagePayload> imagePayloads() {
 		return List.of(
-			new ImagePayload("london.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london.jpg", 15188, "MAIN"),
-			new ImagePayload("london1.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london1.jpg", 15188, "THUMBNAIL"),
-			new ImagePayload("london2.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london2.jpg", 15188, "THUMBNAIL"),
-			new ImagePayload("london3.jpg", "image/jpeg", "http://localhost:8082/api/admin/products/images/london3.jpg", 15188, "THUMBNAIL")
-			);
+			new ImagePayload("london.jpg", "MAIN"),
+			new ImagePayload("london1.jpg", "THUMBNAIL"),
+			new ImagePayload("london2.jpg",  "THUMBNAIL"),
+			new ImagePayload("london3.jpg", "THUMBNAIL")
+		);
 	}
 
 	public static List<String> cautionNotePayloads() {
@@ -197,29 +197,21 @@ public class Fixtures {
 		return Set.of(
 			Image.builder()
 				.fileName("main.jpg")
-				.size(601231)
-				.mimeType("image/jpg")
 				.imageType(ImageType.MAIN)
 				.createdAt(LocalDateTime.now())
 				.build(),
 			Image.builder()
 				.fileName("thumb1.jpg")
-				.size(701231)
-				.mimeType("image/jpg")
 				.imageType(ImageType.THUMBNAIL)
 				.createdAt(LocalDateTime.now())
 				.build(),
 			Image.builder()
 				.fileName("thumb2.jpg")
-				.size(501231)
-				.mimeType("image/jpg")
 				.imageType(ImageType.THUMBNAIL)
 				.createdAt(LocalDateTime.now())
 				.build(),
 			Image.builder()
 				.fileName("thumb3.jpg")
-				.size(801231)
-				.mimeType("image/jpg")
 				.imageType(ImageType.THUMBNAIL)
 				.createdAt(LocalDateTime.now())
 				.build()

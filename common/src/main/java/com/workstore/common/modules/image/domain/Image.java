@@ -26,9 +26,6 @@ public class Image {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String fileName;
-	private String mimeType;
-	private String filePath;
-	private long size;
 	@Enumerated(EnumType.STRING)
 	private ImageType imageType;
 	private LocalDateTime createdAt;
@@ -38,11 +35,8 @@ public class Image {
 		this.createdAt = LocalDateTime.now();
 	}
 
-	public Image(String fileName, String mimeType, String filePath, long size, ImageType imageType) {
+	public Image(String fileName, ImageType imageType) {
 		this.fileName = fileName;
-		this.filePath = filePath;
-		this.size = size;
-		this.mimeType = mimeType;
 		this.imageType = imageType;
 	}
 }

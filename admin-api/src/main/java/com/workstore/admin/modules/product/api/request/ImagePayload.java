@@ -4,19 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor
 public class ImagePayload {
 	private String fileName;
-	private String mimeType;
-	private String filePath;
-	private long size;
+	//private String filePath;
 	private String imageType;
 
-	public ImagePayload(String fileName, String mimeType, long size,
-		String imageType) {
+	public ImagePayload(String fileName, String imageType) {
 		this.fileName = fileName;
-		this.mimeType = mimeType;
-		this.size = size;
 		this.imageType = imageType;
 	}
 }

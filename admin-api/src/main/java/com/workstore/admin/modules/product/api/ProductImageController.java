@@ -45,7 +45,7 @@ public class ProductImageController {
 			.path(localImage.getFileName())
 			.toUriString();
 
-		localImage.setFilePath(fileCallBackUri);
+		//localImage.setFilePath(fileCallBackUri);
 		return new UploadResponse(localImage);
 	}
 

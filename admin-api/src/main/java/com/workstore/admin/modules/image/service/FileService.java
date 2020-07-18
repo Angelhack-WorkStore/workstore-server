@@ -47,7 +47,7 @@ public class FileService {
 			Path targetLocation = this.fileLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-			ImagePayload image = new ImagePayload(fileName, file.getContentType(), file.getSize(), imageType);
+			ImagePayload image = new ImagePayload(fileName, imageType);
 			return image;
 		} catch (IOException ex) {
 			throw new IllegalStateException("Could not store file " + fileName + ". Please try again!", ex);

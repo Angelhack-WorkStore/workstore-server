@@ -71,9 +71,7 @@ public class ProductMaker {
 	private Set<Image> convertImages(List<ImagePayload> imagePayloads) {
 		Set<Image> images = new HashSet<>();
 		for(ImagePayload each : imagePayloads) {
-			images.add(new Image(each.getFileName(),
-				each.getMimeType(),
-				each.getFilePath(), each.getSize(), ImageType.valueOf(each.getImageType())));
+			images.add(new Image(each.getFileName(), ImageType.valueOf(each.getImageType())));
 		}
 		return images;
 	}
