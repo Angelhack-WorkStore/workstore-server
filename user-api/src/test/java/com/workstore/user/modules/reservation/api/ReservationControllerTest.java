@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +16,7 @@ import com.workstore.user.modules.common.IntegrationTests;
 import com.workstore.user.modules.common.mock.Fixtures;
 import com.workstore.user.modules.reservation.api.request.ReservationPayload;
 
+@Disabled
 class ReservationControllerTest extends IntegrationTests {
 	private static final String RESERVE_API = "/api/reservations";
 

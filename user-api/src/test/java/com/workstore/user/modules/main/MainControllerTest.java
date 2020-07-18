@@ -1,15 +1,16 @@
 package com.workstore.user.modules.main;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.workstore.user.modules.common.IntegrationTests;
 
+@Disabled
 class MainControllerTest extends IntegrationTests {
 
 	@Test

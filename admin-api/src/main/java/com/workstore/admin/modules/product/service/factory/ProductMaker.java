@@ -2,9 +2,11 @@ package com.workstore.admin.modules.product.service.factory;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -113,7 +115,12 @@ public class ProductMaker {
 	private List<Facility> convertAmenities(ProductPayload payload) {
 		List<Facility> amenities = new ArrayList<>();
 		for(String each : payload.getAmenities()) {
-			amenities.add(Facility.valueOf(each));
+
+			Arrays.stream(Facility.values())
+				.filter(f -> f.isCorrect(each))
+				.map(Facility::getName)
+				.collect(Collectors.toList());
+			amenities.add(Facility.valueOf(Facility.class, each));
 		}
 		return amenities;
 	}
