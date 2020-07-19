@@ -17,6 +17,12 @@ public class UserAppProperties {
 	private final OAuth2 oauth2 = new OAuth2();
 	private final Mail mail = new Mail();
 	private final KakaoPay kakaoPay = new KakaoPay();
+	private final FileStorage file = new FileStorage();
+
+	@Data
+	public static class FileStorage {
+		private String uploadDir;
+	}
 
 	@Data
 	public static class KakaoPay {
