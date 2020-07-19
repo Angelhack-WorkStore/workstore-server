@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,7 +34,8 @@ class UserAuthControllerTest extends IntegrationTests {
 	}
 
 	@Test
-	void register() throws Exception {
+	@DisplayName("회원가입 - 성공")
+	void given_SignUpRequest_When_Register_Then_Success_HTTP_CODE_3xxRedirection() throws Exception {
 		SignUpRequest signUpRequest = new SignUpRequest();
 		signUpRequest.setEmail("msolo021015@naver.com");
 		signUpRequest.setName("rebwon");
@@ -48,8 +50,25 @@ class UserAuthControllerTest extends IntegrationTests {
 	}
 
 	@Test
+	@DisplayName("회원가입 - 실패 - 잘못된 입력")
+	void given_InvalidSignUpRequest_When_Register_Then_Failed_HTTP_CODE_BAD_REQUEST() throws Exception {
+		SignUpRequest signUpRequest = new SignUpRequest();
+		signUpRequest.setEmail("msolo0210naver.com");
+		signUpRequest.setName("");
+		signUpRequest.setPassword("1234");
+
+		mockMvc.perform(post("/api/auth/signup")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(signUpRequest))
+		)
+			.andDo(print())
+			.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	@DisplayName("로그인 - 성공")
 	@Transactional
-	void login() throws Exception {
+	void given_LoginRequest_When_Login_Then_Success_HTTP_CODE_200() throws Exception {
 		SignUpRequest signUpRequest = new SignUpRequest();
 		signUpRequest.setEmail("msolo021015@naver.com");
 		signUpRequest.setName("rebwon");
