@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -48,6 +49,7 @@ public class Product {
 	private Association<Account> ownerId;
 	private String name;				// 공간 상호명
 	private String description;			// 공간 한줄 소개
+	@Lob
 	private String content;				// 공간 소개
 	@Embedded
 	private Address address;			// 공간 주소

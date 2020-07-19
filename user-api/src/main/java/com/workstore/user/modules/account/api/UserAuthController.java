@@ -51,7 +51,7 @@ public class UserAuthController {
 		}
 
 		accountService.completeSignUp(account);
-		URI redirectUri = new URI("http://localhost:3000/login");
+		URI redirectUri = new URI("http://localhost:3001/login");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(redirectUri);
 		return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
@@ -83,7 +83,7 @@ public class UserAuthController {
 
 		accountService.register(signUpRequest);
 
-		URI redirectUri = new URI("http://localhost:3000/login");
+		URI redirectUri = new URI("http://localhost:3001/login");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(redirectUri);
 
