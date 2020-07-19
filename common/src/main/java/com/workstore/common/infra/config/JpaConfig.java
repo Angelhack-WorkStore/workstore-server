@@ -1,4 +1,4 @@
-package com.workstore.admin.infra.config;
+package com.workstore.common.infra.config;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
