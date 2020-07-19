@@ -1,4 +1,4 @@
-package com.workstore.user.modules.reservation.service.factory;
+package com.workstore.user.modules.reservation.service.component;
 
 import java.util.ArrayList;
 import java.util.List;

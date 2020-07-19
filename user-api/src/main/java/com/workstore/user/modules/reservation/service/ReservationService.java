@@ -8,7 +8,7 @@ import com.workstore.common.modules.reservation.domain.Reservation;
 import com.workstore.common.modules.reservation.domain.ReservationRepository;
 import com.workstore.user.modules.reservation.api.request.ReservationPayload;
 import com.workstore.user.modules.reservation.exception.ReservationNotFoundException;
-import com.workstore.user.modules.reservation.service.factory.ReservationMaker;
+import com.workstore.user.modules.reservation.service.component.ReservationMaker;
 import lombok.RequiredArgsConstructor;
 
 @Service
