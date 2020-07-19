@@ -1,5 +1,9 @@
 package com.workstore.admin.modules.account.service;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +13,8 @@ import org.thymeleaf.context.Context;
 import com.workstore.admin.infra.config.AdminAppProperties;
 import com.workstore.admin.infra.mail.MailMessage;
 import com.workstore.admin.infra.mail.MailService;
+import com.workstore.admin.infra.security.TokenProvider;
+import com.workstore.admin.modules.account.api.request.LoginRequest;
 import com.workstore.admin.modules.account.api.request.SignUpRequest;
 import com.workstore.common.modules.account.domain.Account;
 import com.workstore.common.modules.account.domain.AccountRepository;
@@ -20,11 +26,13 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class AdminAccountService {
+	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	private final AccountRepository accountRepository;
 	private final MailService mailService;
 	private final AdminAppProperties appProperties;
 	private final TemplateEngine templateEngine;
+	private final TokenProvider tokenProvider;
 
 	public Account register(SignUpRequest request) {
 		Account newAccount = saveNewAccount(request);
@@ -65,5 +73,16 @@ public class AdminAccountService {
 
 	public void completeSignUp(Account account) {
 		account.completeSignUp();
+	}
+
+	public String login(LoginRequest request) {
+		Authentication authentication = authenticationManager.authenticate(
+			new UsernamePasswordAuthenticationToken(
+				request.getEmail(),
+				request.getPassword()
+			)
+		);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		return tokenProvider.createToken(authentication);
 	}
 }
