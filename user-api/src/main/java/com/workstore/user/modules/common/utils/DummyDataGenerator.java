@@ -40,8 +40,8 @@ public class DummyDataGenerator implements CommandLineRunner {
 	public static Product.ProductBuilder sampleOne() {
 		return Product.builder()
 			.ownerId(new Association<>(1L))
-			.name("자유인들")
-			.description("홍대에 있는 빈티지 엔틱분위기의 카페자유인들")
+			.name("[홍대] 코너스톤스페이스 지정석")
+			.description("홍대에 있는 빈티지 엔틱분위기의 코너스톤스페이스 지정석")
 			.content("1, 2층으로 나뉘어져 있으며, 대관시 2층의 엔틱, 빈티지 분위기의 유니크한 인테리어를"
 				+ " 이용하여 각종 행사 / 전시 / 코워킹스페이스 등을 진행하고 있습니다. 2층 단독 화장실도 있기 때문에 장소를 이용하기에 방해 없이 즐기실 수 있습니다.")
 			.likeCount(5)
@@ -79,13 +79,13 @@ public class DummyDataGenerator implements CommandLineRunner {
 	public static Product.ProductBuilder sampleThree() {
 		return Product.builder()
 			.ownerId(new Association<>(3L))
-			.name("코너스톤스페이스 지정석")
-			.description("캄(Calm)워킹스페이스, 코너스톤스페이스")
-			.content("[오피스 설명]  - 층별 지문인식, 오피스 개별 도어락으로 최고의 보안을 갖춘 오피스 "
-				+ "- 1년 365일 24시간 언제나 사용할 수 있는 공간 개별 주말포함 24시간 냉·난방으로 쾌적한 업무환경 제공 - Casamia와 콜라보레이션한 1400mm*700mm의 넓은 책상 ")
-			.likeCount(8)
-			.address(sampleAddress().address1("서울특별시 강남구 강남대로 624").address2("신사역 ICT타워 6층").build())
-			.seatInfo(sampleSeatInfo().minPersonnelCount(1).maxPersonnelCount(5).seatType(SeatType.FIX).seatCount(5).build())
+			.name("벤처스페이스 오피스 1인-8인")
+			.description("중소기업청 창업진흥원 지정 창업 비즈니스센터")
+			.content("강남역 4번 출구에 위치한 정부 지정 창업 비즈니스센터로 유망한 스타트업 기업이 많이 입주하여 있습니다."
+				+ "기술 멘토, 경영 멘토, 디자인 멘토, 세무 회계 특허 법률 등 다양한 멘토링을 받을 수 있습니다.")
+			.likeCount(10)
+			.address(sampleAddress().address1("서울특별시 강남구 강남대로 342").address2("역삼빌딩 5층").build())
+			.seatInfo(sampleSeatInfo().minPersonnelCount(1).maxPersonnelCount(8).seatType(SeatType.FIX).seatCount(8).build())
 			.hostInfo(sampleHostInfo().build())
 			.prices(samplePricesThree())
 			.cautionNotes(sampleCautionNotesOne())
@@ -121,7 +121,7 @@ public class DummyDataGenerator implements CommandLineRunner {
 			.seatCount(10)
 			.maxPersonnelCount(10)
 			.minPersonnelCount(1)
-			.seatType(SeatType.FREE);
+			.seatType(SeatType.FIX);
 	}
 
 	public static HostInfo.HostInfoBuilder sampleHostInfo() {
@@ -202,8 +202,8 @@ public class DummyDataGenerator implements CommandLineRunner {
 			new Tag("강남역"),
 			new Tag("1인사무실"),
 			new Tag("코워킹스페이스"),
-			new Tag("신사역"),
-			new Tag("고정석")
+			new Tag("독립사무실"),
+			new Tag("비즈니스센터")
 		);
 	}
 

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.workstore.user.modules.common.IntegrationTests;
 
-@Disabled
+//@Disabled
 class MainControllerTest extends IntegrationTests {
 
 	@Test

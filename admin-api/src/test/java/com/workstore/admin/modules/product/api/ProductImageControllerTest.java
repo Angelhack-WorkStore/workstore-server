@@ -37,8 +37,8 @@ class ProductImageControllerTest extends IntegrationTests {
 	@Test
 	@DisplayName("상품 이미지 조회 - 성공")
 	void when_FindImage_Then_Success_HTTP_CODE_200() throws Exception {
-		// This Method Fine Local Directory Images
-		// Local Directory information is see application.properties
+		// This method fine local directory images
+		// The local directory path is in the application.properties
 		mockMvc.perform(get(IMAGE_API + "/london.jpg"))
 			.andExpect(status().isOk());
 	}

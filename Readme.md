@@ -7,11 +7,24 @@
 ```shell script
 $ mvn clean package
 ```
-
 - Add dependencies to projects.
 - Build and test, and make it into a jar packaging file.
 
-### User-API EndPoints
+### Run Admin API
+
+```shell script
+$ cd admin-api
+$ java -jar admin-api.jar
+```
+
+### Run User API
+
+```shell script
+$ cd user-api
+$ java -jar user-api.jar
+```
+
+### User API EndPoints
 
 User Main
 > localhost:8081/
@@ -36,7 +49,7 @@ User Reserve Product
 User Payment Reserve Product
 > POST localhost:8081/api/reservations/{reservationId}/pay
 
-### Admin-API EndPoints
+### Admin API EndPoints
 
 Admin Register Local
 > localhost:8082/api/auth/signup
@@ -75,7 +88,7 @@ Common Module - Spring Data JPA, H2, Configuration Processor, QueryDsl
 
 User,Admin Module - Spring Boot Mail, thymeleaf, validation, web, oauth2-client, security, restdocs, jjwt, asm, json-smart
 
-### Setting up Dev
+### Setting up Development
 
 ```shell script
 $ git clone https://github.com/Angelhack-WorkStore/workstore-server.git
