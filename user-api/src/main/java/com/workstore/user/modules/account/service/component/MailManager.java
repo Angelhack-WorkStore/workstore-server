@@ -1,0 +1,38 @@
+package com.workstore.user.modules.account.service.component;
+
+import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import com.workstore.common.modules.account.domain.Account;
+import com.workstore.user.infra.config.UserAppProperties;
+import com.workstore.user.infra.mail.MailMessage;
+import com.workstore.user.infra.mail.MailService;
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class MailManager {
+	private final MailService mailService;
+	private final UserAppProperties appProperties;
+	private final TemplateEngine templateEngine;
+
+	public void sendSignUpConfirmEmail(Account newAccount) {
+		Context context = new Context();
+		context.setVariable("link", "/api/auth/check-email-token?token=" + newAccount.getEmailCheckToken() +
+			"&email=" + newAccount.getEmail());
+		context.setVariable("nickname", newAccount.getNickname());
+		context.setVariable("linkName", "이메일 인증하기");
+		context.setVariable("message", "WorkStore 서비스를 사용하려면 링크를 클릭하세요.");
+		context.setVariable("host", appProperties.getMail().getHost());
+		String message = templateEngine.process("mail/simple-link", context);
+
+		MailMessage emailMessage = MailMessage.builder()
+			.to(newAccount.getEmail())
+			.subject("WorkStore, 회원 가입 인증")
+			.message(message)
+			.build();
+
+		mailService.send(emailMessage);
+	}
+}

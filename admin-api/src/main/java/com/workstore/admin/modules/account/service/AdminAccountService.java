@@ -46,13 +46,13 @@ public class AdminAccountService {
 			"&email=" + newAccount.getEmail());
 		context.setVariable("nickname", newAccount.getNickname());
 		context.setVariable("linkName", "이메일 인증하기");
-		context.setVariable("message", "소세지 서비스를 사용하려면 링크를 클릭하세요.");
+		context.setVariable("message", "WorkStore 서비스를 사용하려면 링크를 클릭하세요.");
 		context.setVariable("host", appProperties.getMail().getHost());
 		String message = templateEngine.process("mail/simple-link", context);
 
 		MailMessage emailMessage = MailMessage.builder()
 			.to(newAccount.getEmail())
-			.subject("소세지, 회원 가입 인증")
+			.subject("WorkStore, 회원 가입 인증")
 			.message(message)
 			.build();
 
