@@ -1,6 +1,5 @@
 package com.workstore.admin.modules.account.api;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,6 @@ public class AccountController {
 	private final AccountRepository accountRepository;
 
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')")
 	public Account getCurrentUser(@CurrentUser Account account) {
 		return accountRepository.findById(account.getId())
 			.orElseThrow(AccountNotFoundException::new);
