@@ -21,7 +21,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
+import com.workstore.common.modules.account.domain.Account;
 import com.workstore.common.modules.common.domain.Money;
+import com.workstore.common.modules.reservation.domain.event.ReservationCompletedEvent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -62,10 +64,11 @@ public class Reservation extends AbstractAggregateRoot<Reservation> {
 		return new Reservation(user, personnelCount, lineItems);
 	}
 
-	public void pay() {
+	public void paymentComplete(Account account) {
 		this.status = ReservationStatus.RESERVED;
 		this.reservedAt = LocalDateTime.now();
 		this.modifiedAt = LocalDateTime.now();
+		registerEvent(new ReservationCompletedEvent(this, account));
 	}
 
 	public void cancel() {

@@ -18,7 +18,9 @@ public enum ErrorCode {
 	EMAIL_ALREADY_USE(400, "E002", "This Email already used"),
 	EMAIL_NOT_VERIFIED(400, "E003", "This Email Not Verified"),
 
-	NICKNAME_ALREADY_USED(400, "N001", "This Nickname already used");
+	NICKNAME_ALREADY_USED(400, "N001", "This Nickname already used"),
+
+	KAKAO_PAY_FAILED(500, "K001", "Failed to prepare Kakao Pay payment.");
 
 	private String code;
 	private String message;

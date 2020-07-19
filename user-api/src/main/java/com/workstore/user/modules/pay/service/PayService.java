@@ -21,6 +21,7 @@ import com.workstore.common.modules.reservation.domain.Reservation;
 import com.workstore.common.modules.reservation.domain.ReservationRepository;
 import com.workstore.user.infra.config.UserAppProperties;
 import com.workstore.user.modules.account.exception.AccountNotFoundException;
+import com.workstore.user.modules.pay.api.response.KakaoPayApprovalResponse;
 import com.workstore.user.modules.pay.api.response.KakaoPayReadyResponse;
 import com.workstore.user.modules.reservation.exception.ReservationNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PayService {
 	private static final String HOST = "https://kapi.kakao.com";
+	private KakaoPayReadyResponse response;
 	private final ReservationRepository reservationRepository;
 	private final AccountRepository accountRepository;
 	private final ProductRepository productRepository;
@@ -41,18 +43,48 @@ public class PayService {
 		Product product = productRepository.findById(reservation.getProductId()).orElseThrow(IllegalArgumentException::new);
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = setKakaoApiHeaders();
-		MultiValueMap<String, String> params = setPaySettings(reservationId, reservation, account, product);
+		MultiValueMap<String, String> params = setPreparePayment(reservationId, reservation, account, product);
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 		try {
-			return restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"),
+			response = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"),
 				body, KakaoPayReadyResponse.class);
+			return response;
 		}  catch (RestClientException | URISyntaxException ex) {
 			ex.printStackTrace();
 		}
 		return null;
 	}
 
-	private MultiValueMap<String, String> setPaySettings(Long reservationId, Reservation reservation, Account account,
+	public KakaoPayApprovalResponse getSuccessInfo(Long reservationId, String pgToken, Account account) {
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = setKakaoApiHeaders();
+		Reservation reservation = reservationRepository.findById(reservationId)
+			.orElseThrow(ReservationNotFoundException::new);
+		MultiValueMap<String, String> params = setRequestPayment(reservationId, pgToken, account, reservation);
+		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
+
+		try {
+			return restTemplate.postForObject(
+				new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalResponse.class);
+		} catch (RestClientException | URISyntaxException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	private MultiValueMap<String, String> setRequestPayment(Long reservationId, String pgToken, Account account,
+		Reservation reservation) {
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("cid", "TC0ONETIME");
+		params.add("tid", response.getTid());
+		params.add("partner_order_id", String.valueOf(reservationId));
+		params.add("partner_user_id", account.getNickname());
+		params.add("pg_token", pgToken);
+		params.add("total_amount", reservation.getTotalAmount().longValue().toString());
+		return params;
+	}
+
+	private MultiValueMap<String, String> setPreparePayment(Long reservationId, Reservation reservation, Account account,
 		Product product) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("cid", "TC0ONETIME");
@@ -62,9 +94,9 @@ public class PayService {
 		params.add("quantity", reservation.getQuantity().toString());
 		params.add("total_amount", reservation.getTotalAmount().longValue().toString());
 		params.add("tax_free_amount", "5500");
-		params.add("approval_url", "http://localhost:3000/kakaoPaySuccess");
-		params.add("cancel_url", "http://localhost:3000/kakaoPayCancel");
-		params.add("fail_url", "http://localhost:3000/kakaoPaySuccessFail");
+		params.add("approval_url", "http://localhost:8081/api/pay/kakaoPaySuccess?reservation=" + reservationId);
+		params.add("cancel_url", "http://localhost:3001/kakaoPayCancel");
+		params.add("fail_url", "http://localhost:3001/kakaoPaySuccessFail");
 		return params;
 	}
 
