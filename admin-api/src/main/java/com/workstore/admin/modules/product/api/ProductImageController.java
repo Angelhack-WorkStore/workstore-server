@@ -36,7 +36,7 @@ public class ProductImageController {
 	private final FileService fileService;
 
 	@PostMapping("/image")
-	public ResponseEntity<UploadResponse> upload(@RequestParam("image") MultipartFile image, @RequestParam("imageType") String imageType
+	public UploadResponse upload(@RequestParam("image") MultipartFile image, @RequestParam("imageType") String imageType
 		/*@CurrentUser Account account*/) {
 		ImagePayload localImage = fileService.storeFile(image, imageType);
 
@@ -46,11 +46,11 @@ public class ProductImageController {
 			.toUriString();
 
 		//localImage.setFilePath(fileCallBackUri);
-		return ResponseEntity.ok(new UploadResponse(localImage));
+		return new UploadResponse(localImage);
 	}
 
 	@PostMapping("/images")
-	public List<ResponseEntity<UploadResponse>> multipleUpload(@RequestParam("image") MultipartFile[] images, @RequestParam("imageType") String imageType
+	public List<UploadResponse> multipleUpload(@RequestParam("image") MultipartFile[] images, @RequestParam("imageType") String imageType
 		/*@CurrentUser Account account*/) {
 		return Arrays.stream(images)
 			.map(image -> upload(image, imageType/*account*/))
