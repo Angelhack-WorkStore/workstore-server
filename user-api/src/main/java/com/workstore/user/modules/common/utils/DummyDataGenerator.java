@@ -40,11 +40,10 @@ public class DummyDataGenerator implements CommandLineRunner {
 	public static Product.ProductBuilder sampleOne() {
 		return Product.builder()
 			.ownerId(new Association<>(1L))
-			.name("슈가맨워크 상동1호점 자유석")
-			.description("온라인기반 사업을 영위하는 분들의 최적화된 공간.")
-			.content("‘공간이 우리를 움직입니다’ 국내 유일의 공간심리학 기반 공유사무실 슈가맨워크의 첫 번째 공간! "
-				+ "입주자들의 생산성과 효율성을 높이고 창의적인 아이디어가 잘 떠오를 수 있도록 공간을 디자인했습니다! "
-				+ "슈가맨워크가 제공하는 다양한 편의시설 및 비즈니스 혜택을 누릴 수 있습니다.")
+			.name("자유인들")
+			.description("홍대에 있는 빈티지 엔틱분위기의 카페자유인들")
+			.content("1, 2층으로 나뉘어져 있으며, 대관시 2층의 엔틱, 빈티지 분위기의 유니크한 인테리어를"
+				+ " 이용하여 각종 행사 / 전시 / 코워킹스페이스 등을 진행하고 있습니다. 2층 단독 화장실도 있기 때문에 장소를 이용하기에 방해 없이 즐기실 수 있습니다.")
 			.likeCount(5)
 			.address(sampleAddress().build())
 			.seatInfo(sampleSeatInfo().build())
@@ -112,15 +111,15 @@ public class DummyDataGenerator implements CommandLineRunner {
 
 	public static Address.AddressBuilder sampleAddress() {
 		return Address.builder()
-			.address1("경기도 부천시 상동 533-1")
-			.address2("드라마시티 702호")
+			.address1("서울특별시 마포구 와우산로 22길 34")
+			.address2("자유인들 1층, 2층")
 			.zipCode("233-12");
 	}
 
 	public static SeatInfo.SeatInfoBuilder sampleSeatInfo() {
 		return SeatInfo.builder()
-			.seatCount(4)
-			.maxPersonnelCount(4)
+			.seatCount(10)
+			.maxPersonnelCount(10)
 			.minPersonnelCount(1)
 			.seatType(SeatType.FREE);
 	}
@@ -182,8 +181,8 @@ public class DummyDataGenerator implements CommandLineRunner {
 
 	public static Set<Tag> sampleTagsOne() {
 		return Set.of(
-			new Tag("부천소호사무실"),
-			new Tag("1인사무실"),
+			new Tag("엔틱"),
+			new Tag("카페"),
 			new Tag("코워킹스페이스")
 		);
 	}
